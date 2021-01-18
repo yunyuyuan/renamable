@@ -1,0 +1,37 @@
+#container{
+  background: whitesmoke;
+  >.head{
+    >.choose-file{
+
+    }
+    >.choose-folder{
+
+    }
+    >.input{
+
+    }
+    >.output{
+
+    }
+  }
+  >.body{
+
+  }
+  >.footer{
+    >.choose{
+
+    }
+    >.remove{
+      background: gray;
+      &[available=t]{
+        background: #ff3d3d;
+      }
+    }
+    >.do{
+      background: gray;
+      &[available=t]{
+        background: #0aff77;
+      }
+    }
+  }
+}

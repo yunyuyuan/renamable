@@ -1,0 +1,12 @@
+#container {
+  background: whitesmoke; }
+  #container > .footer > .remove {
+    background: gray; }
+    #container > .footer > .remove[available=t] {
+      background: #ff3d3d; }
+  #container > .footer > .do {
+    background: gray; }
+    #container > .footer > .do[available=t] {
+      background: #0aff77; }
+
+/*# sourceMappingURL=container.css.map */
