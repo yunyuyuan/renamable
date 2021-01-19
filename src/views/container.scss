@@ -15,7 +15,28 @@
     }
   }
   >.body{
-
+    QTableWidget{
+      background: white;
+      border: 1px solid;
+      border-radius: 0;
+      .choose{
+      }
+      .input{
+        color: black;
+        margin: 0 20px;
+      }
+      .output{
+        color: black;
+        margin: 0 20px;
+      }
+      .status{
+        border-radius: 5px;
+        background: #00dc4f;
+        &[status=warn]{
+          background: #d7ab34;
+        }
+      }
+    }
   }
   >.footer{
     >.choose{
@@ -30,7 +51,7 @@
     >.do{
       background: gray;
       &[available=t]{
-        background: #0aff77;
+        background: #0073ff;
       }
     }
   }

@@ -1,5 +1,20 @@
 #container {
   background: whitesmoke; }
+  #container > .body QTableWidget {
+    background: white;
+    border: 1px solid;
+    border-radius: 0; }
+    #container > .body QTableWidget .input {
+      color: black;
+      margin: 0 20px; }
+    #container > .body QTableWidget .output {
+      color: black;
+      margin: 0 20px; }
+    #container > .body QTableWidget .status {
+      border-radius: 5px;
+      background: #00dc4f; }
+      #container > .body QTableWidget .status[status=warn] {
+        background: #d7ab34; }
   #container > .footer > .remove {
     background: gray; }
     #container > .footer > .remove[available=t] {
@@ -7,6 +22,6 @@
   #container > .footer > .do {
     background: gray; }
     #container > .footer > .do[available=t] {
-      background: #0aff77; }
+      background: #0073ff; }
 
 /*# sourceMappingURL=container.css.map */

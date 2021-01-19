@@ -1,12 +1,3 @@
-.body-file-row[state=not-change] {
-  border-color: gray; }
-.body-file-row > .input {
-  color: black; }
-.body-file-row > .output {
-  color: black; }
-.body-file-row > .choose {
-  border: 1px solid black; }
-  .body-file-row > .choose[active=t] {
-    background: red; }
+
 
 /*# sourceMappingURL=body_file_row.css.map */
