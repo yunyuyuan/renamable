@@ -14,6 +14,7 @@ class Container(QWidget):
         super().__init__()
         self.setObjectName("container")
         self.setWindowTitle("批量重命名工具")
+        self.setWindowIcon(QIcon('src/icon.png'))
         self.body_layout = QVBoxLayout()
         self.files_widget_list = []
         self.all_chosen = False
