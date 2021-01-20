@@ -5,6 +5,7 @@ from os.path import dirname, basename, isfile, join
 from PyQt5.Qt import *
 
 from src.components.body_file_row import FileRow
+from src.components.dialog import Dialog
 from src.utils import set_css
 from src.views.about import About
 
@@ -141,6 +142,7 @@ class Container(QWidget):
             else:
                 new_list.append(file)
         self.files_widget_list = new_list
+        self.all_chosen = False
         self.body_table.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeToContents)
         self.file_changed()
 
@@ -163,15 +165,18 @@ class Container(QWidget):
         error_files = []
         for i in candidate:
             if i.file_exist:
-                QMessageBox.warning(None, "文件已存在", f"文件(夹){i.output_name}已经存在，无法执行!", QMessageBox.Yes, QMessageBox.Yes)
+                Dialog('warn', "文件已存在", f"文件(夹){i.output_name}已经存在，无法执行!")
                 return
             if i.output_name in lis:
                 for file in candidate:
                     file.set_same_name_warn(i.output_name)
-                QMessageBox.warning(None, "文件名重复", f"文件名{i.output_name}存在重复，无法执行!", QMessageBox.Yes, QMessageBox.Yes)
+                Dialog('warn', "文件名重复", f"文件名{i.output_name}存在重复，无法执行!")
                 return
             lis.append(i.output_name)
         for i in candidate:
             if not i.do_rename():
                 error_files.append(i.input_name)
-        QMessageBox.critical(None, "重命名失败", f"以下文件{error_files}重命名失败!", QMessageBox.Yes, QMessageBox.Yes)
+        if len(error_files):
+            Dialog('error', "重命名失败", f"以下文件{error_files}重命名失败!")
+        else:
+            Dialog('success', "重命名成功", f"重命名成功!")

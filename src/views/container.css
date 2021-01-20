@@ -33,7 +33,7 @@
       #container > .body QTableWidget .status[status=warn] {
         background: #d7ab34; }
       #container > .body QTableWidget .status[status=exist] {
-        background: #d7ab34; }
+        background: #d02323; }
   #container > .footer > .remove {
     background: gray; }
     #container > .footer > .remove[available=t] {
