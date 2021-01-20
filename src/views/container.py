@@ -41,7 +41,9 @@ class Container(QWidget):
     def set_layout(self):
         head_layout = QGridLayout()
         head_layout.addWidget(self.input_regx, 0, 0, 1, 3)
-        head_layout.addWidget(QLabel("→", self.frame_head), 0, 3, 1, 2)
+        mid = QLabel("→", self.frame_head)
+        mid.setAlignment(Qt.AlignCenter)
+        head_layout.addWidget(mid, 0, 3, 1, 2)
         head_layout.addWidget(self.out_regx, 0, 5, 1, 3)
         self.frame_head.setLayout(head_layout)
 
@@ -53,7 +55,9 @@ class Container(QWidget):
 
         layout = QVBoxLayout()
         layout.setContentsMargins(0, 0, 0, 0)
-        layout.addWidget(self.menubar)
+        menu_layout = QHBoxLayout()
+        menu_layout.addWidget(self.menubar)
+        layout.addLayout(menu_layout)
         layout.addWidget(self.frame_head)
         layout.addWidget(self.frame_body)
         self.setLayout(layout)

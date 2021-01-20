@@ -1,11 +1,14 @@
 #container{
-  background: whitesmoke;
+  background: #e7e7e7;
   >.head{
-    >.choose-file{
-
+    QLineEdit{
+      color: black;
+      background: #ffffff;
+      border: 1px solid black;
+      padding: 4px 8px;
     }
-    >.choose-folder{
-
+    QLabel{
+      color: black;
     }
     >.input{
 
@@ -17,9 +20,18 @@
   >.body{
     QTableWidget{
       background: white;
-      border: 1px solid;
+      border: 1px solid gray;
       border-radius: 0;
       margin: 10px;
+      QHeaderView{
+        background: transparent;
+      }
+      QHeaderView:section{
+        text-align:center;
+        background: #2f2f2f;
+        margin:0px;
+        color:#DCDCDC;
+      }
       .choose{
       }
       .input{
@@ -40,7 +52,7 @@
           background: #d7ab34;
         }
         &[status=exist]{
-          background: #d73434;
+          background: #d7ab34;
         }
       }
     }

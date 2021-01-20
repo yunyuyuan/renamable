@@ -1,10 +1,24 @@
 #container {
-  background: whitesmoke; }
+  background: #e7e7e7; }
+  #container > .head QLineEdit {
+    color: black;
+    background: #ffffff;
+    border: 1px solid black;
+    padding: 4px 8px; }
+  #container > .head QLabel {
+    color: black; }
   #container > .body QTableWidget {
     background: white;
-    border: 1px solid;
+    border: 1px solid gray;
     border-radius: 0;
     margin: 10px; }
+    #container > .body QTableWidget QHeaderView {
+      background: transparent; }
+    #container > .body QTableWidget QHeaderView:section {
+      text-align: center;
+      background: #2f2f2f;
+      margin: 0px;
+      color: #DCDCDC; }
     #container > .body QTableWidget .input {
       color: black;
       margin: 0 20px; }
@@ -19,7 +33,7 @@
       #container > .body QTableWidget .status[status=warn] {
         background: #d7ab34; }
       #container > .body QTableWidget .status[status=exist] {
-        background: #d73434; }
+        background: #d7ab34; }
   #container > .footer > .remove {
     background: gray; }
     #container > .footer > .remove[available=t] {
