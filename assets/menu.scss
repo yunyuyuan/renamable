@@ -21,7 +21,7 @@ QMenuBar{
       color: #666666;
     }
 
-    &:item:selected {
+    &:item:enabled:selected {
       border-color: gray;
       background: #90ffff;
     }

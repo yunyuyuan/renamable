@@ -17,7 +17,7 @@ class Menu(QMenuBar):
 
         self.bind_action()
         self.set_element()
-        set_css(self, 'src/views/menu.css')
+        set_css(self, 'assets/menu.css')
 
     def bind_action(self):
         action_add_file = QAction('导入文件', self)

@@ -1,9 +1,9 @@
 from PyQt5.Qt import *
-from os.path import join, exists
+from os.path import exists
 from os import rename
 from re import sub
 
-from src.utils import update_css, set_css
+from src.utils import update_css, set_css, parse_path
 
 
 class FileRow(QFrame):
@@ -14,8 +14,8 @@ class FileRow(QFrame):
         self.setProperty("class", "body-file-row")
         self.body, self.container = body, container
         self.dir_name, self.base_name = dir_name, base_name
-        self.input_name = join(dir_name, base_name)
-        self.output_name = join(dir_name, base_name)
+        self.input_name = parse_path(dir_name, base_name)
+        self.output_name = parse_path(dir_name, base_name)
         self.chosen = False
         self.file_exist = False
 
@@ -32,7 +32,7 @@ class FileRow(QFrame):
         self.status_label.setFixedSize(15, 15)
         self.status_label.setProperty("class", "status")
 
-        set_css(self, 'src/components/body_file_row.css')
+        set_css(self, 'assets/body_file_row.css')
 
     def set_layout(self, table: QTableWidget, row):
         idx = 0
@@ -48,7 +48,7 @@ class FileRow(QFrame):
     def update_regx(self, input_, output_):
         self.output_label.setProperty("same", "f")
         update_css(self.output_label)
-        self.output_name = join(self.dir_name, sub(input_, output_, self.base_name))
+        self.output_name = parse_path(self.dir_name, sub(input_, output_, self.base_name))
         self.output_label.setText(self.output_name)
         self.file_exist = False
         if self.input_name == self.output_name:

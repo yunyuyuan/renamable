@@ -15,7 +15,7 @@ class Container(QWidget):
         super().__init__()
         self.setObjectName("container")
         self.setWindowTitle("批量重命名工具")
-        self.setWindowIcon(QIcon('src/icon.png'))
+        self.setWindowIcon(QIcon('assets/icon.png'))
         self.body_layout = QVBoxLayout()
         self.files_widget_list = []
         self.all_chosen = False
@@ -37,7 +37,7 @@ class Container(QWidget):
         self.set_layout()
         self.connect()
         self.set_class()
-        set_css(self, "src/views/container.css")
+        set_css(self, "assets/container.css")
         self.show()
 
     def set_layout(self):
@@ -111,6 +111,7 @@ class Container(QWidget):
                 i.update_regx(input_, output_)
             except re.error:
                 break
+        self.body_table.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeToContents)
 
     # ------------ footer -------------
 

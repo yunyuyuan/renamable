@@ -15,7 +15,7 @@ QMenuBar {
       border: 1px solid transparent; }
     QMenuBar QMenu:item:disabled {
       color: #666666; }
-    QMenuBar QMenu:item:selected {
+    QMenuBar QMenu:item:enabled:selected {
       border-color: gray;
       background: #90ffff; }
     QMenuBar QMenu:separator {

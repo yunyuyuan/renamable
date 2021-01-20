@@ -14,7 +14,7 @@ class About(QDialog):
         self.url_to_git_label = QLabel("", self)
 
         self.set_layout()
-        set_css(self, 'src/views/about.css')
+        set_css(self, 'assets/about.css')
         self.hide()
 
     def set_layout(self):

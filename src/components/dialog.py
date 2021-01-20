@@ -9,11 +9,11 @@ class Dialog(QDialog):
         super().__init__()
         self.setObjectName("dialog")
         self.setFixedWidth(300)
-        self.setWindowIcon(QIcon('src/icon.png'))
+        self.setWindowIcon(QIcon('assets/icon.png'))
         self.setWindowTitle(title)
 
         self.icon_label = QLabel(self)
-        self.icon_label.setPixmap(QPixmap(f'src/components/{type_}.png').scaled(50, 50, Qt.KeepAspectRatio))
+        self.icon_label.setPixmap(QPixmap(f'assets/{type_}.png').scaled(50, 50, Qt.KeepAspectRatio))
         self.icon_label.setProperty("class", "icon")
         self.text_label = QLabel(text, self)
         self.text_label.setWordWrap(True)
@@ -30,6 +30,6 @@ class Dialog(QDialog):
         layout.addLayout(layout1)
         layout.addWidget(self.ok_button)
         self.setLayout(layout)
-        set_css(self, 'src/components/dialog.css')
+        set_css(self, 'assets/dialog.css')
         self.exec()
 
