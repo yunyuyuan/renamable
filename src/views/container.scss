@@ -19,6 +19,7 @@
       background: white;
       border: 1px solid;
       border-radius: 0;
+      margin: 10px;
       .choose{
       }
       .input{
@@ -28,12 +29,18 @@
       .output{
         color: black;
         margin: 0 20px;
+        &[same=t]{
+          color: red;
+        }
       }
       .status{
         border-radius: 5px;
         background: #00dc4f;
         &[status=warn]{
           background: #d7ab34;
+        }
+        &[status=exist]{
+          background: #d73434;
         }
       }
     }

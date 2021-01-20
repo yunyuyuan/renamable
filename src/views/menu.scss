@@ -1,0 +1,43 @@
+QMenuBar{
+  background: white;
+  border-bottom: 1px solid #a8a8a8;
+  color: black;
+  &:item:selected{
+    background: #358dff;
+    color: white;
+  }
+  QMenu{
+    background-color: #f3f3f3;
+    border: 1px solid gray;
+    color: #000000;
+    padding: 1px;
+
+    &:item {
+      padding: 2px 25px 2px 20px;
+      border: 1px solid transparent;
+    }
+
+    &:item:disabled {
+      color: #666666;
+    }
+
+    &:item:selected {
+      border-color: gray;
+      background: #90ffff;
+    }
+
+    &:separator {
+      height: 1px;
+      background: #262626;
+      margin-left: 10px;
+      margin-right: 10px;
+      margin-top: 1px;
+      margin-bottom: 1px;
+    }
+
+    &:indicator {
+      width: 13px;
+      height: 13px;
+    }
+  }
+}
