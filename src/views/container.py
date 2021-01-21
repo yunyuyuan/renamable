@@ -7,6 +7,7 @@ from PyQt5.Qt import *
 
 from src.components.body_file_row import FileRow
 from src.components.dialog import Dialog
+from src.components.running import Running
 from src.utils import set_css
 from src.views.about import About
 
@@ -21,6 +22,7 @@ class Container(QWidget):
         self.files_widget_list = []
         self.all_chosen = False
         self.can_run = False
+        self.is_running = False
         self.back_up = False
 
         from src.views.menu import Menu
@@ -28,6 +30,7 @@ class Container(QWidget):
         self.frame_head = QFrame(self)
         self.frame_body = QFrame(self)
         self.dialog_about = About(self)
+        self.running = Running(self)
         self.body_table = QTableWidget(0, 4, self.frame_body)
 
         self.input_regx = QLineEdit(self.frame_head)
@@ -65,15 +68,20 @@ class Container(QWidget):
         layout.addLayout(menu_layout)
         layout.addWidget(self.frame_head)
         layout.addWidget(self.frame_body)
+        layout.addWidget(self.running)
         self.setLayout(layout)
 
     def connect(self):
         self.input_regx.textChanged.connect(self.apply_regx)
         self.out_regx.textChanged.connect(self.apply_regx)
+        self.running.runner.finished.connect(self.do_finish)
+        self.running.runner.finish_args.connect(lambda *args: Dialog(*args))
+        self.running.abort_btn.clicked.connect(lambda: self.running.runner.abort.emit())
 
     def set_class(self):
         self.frame_head.setProperty("class", "head")
         self.frame_body.setProperty("class", "body")
+        self.running.setProperty("class", "running")
 
         self.input_regx.setProperty("class", "input")
         self.out_regx.setProperty("class", "output")
@@ -173,22 +181,18 @@ class Container(QWidget):
         self.can_run = can_run
 
     def do_operate(self):
+        if self.is_running:
+            return
         candidate = [x for x in self.files_widget_list if x.chosen]
-        # 检查重复
-        lis = []
-        for i in candidate:
-            if i.file_exist:
-                Dialog('warn', "文件已存在", f"文件(夹){i.output_name}已经存在，无法执行!")
-                return
-            if i.output_name in lis:
-                for file in candidate:
-                    file.set_same_name_warn(i.output_name)
-                Dialog('warn', "文件名重复", f"文件名{i.output_name}存在重复，无法执行!")
-                return
-            lis.append(i.output_name)
-        for i in candidate:
-            error = i.do_rename(self.back_up)
-            if error:
-                Dialog('error', "重命名失败", f"以下文件{i.input_name}重命名失败!Error:{error}")
-                return
-        Dialog('success', "重命名成功", f"重命名成功!")
+        self.is_running = True
+        self.running.run(candidate, self.back_up)
+
+    def do_finish(self):
+        self.is_running = False
+
+    def closeEvent(self, e):
+        e.accept()
+        if self.is_running:
+            self.running.runner.abort.emit()
+        else:
+            super().close()

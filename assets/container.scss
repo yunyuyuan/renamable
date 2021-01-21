@@ -49,21 +49,30 @@
       }
     }
   }
-  >.footer{
-    >.choose{
+  >.running{
+    border-top: 1px solid black;
+    background: white;
+    padding: 8px 4px;
+    QProgressBar{
+      border: none;
+      background: rgb(54, 54, 54);
+      border-radius: 5px;
+      text-align: center;
+      color: rgb(229, 229, 229);
+      height: 15px;
 
-    }
-    >.remove{
-      background: gray;
-      &[available=t]{
-        background: #ff3d3d;
+      &:chunk {
+        background-color: rgb(0, 118, 239);
+        border-radius: 4px;
+      }
+      &:disabled{
+        background: rgb(127, 127, 127);
       }
     }
-    >.do{
-      background: gray;
-      &[available=t]{
-        background: #0073ff;
-      }
+    QLabel{
+      color: black;
+      font-weight: bold;
+      margin-left: 5px;
     }
   }
 }

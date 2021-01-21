@@ -53,7 +53,8 @@ class FileRow(QFrame):
         self.back_up_dir = sub('[/\\\\]$', '', self.dir_name) + time_stamp
         self.output_name = parse_path(self.dir_name if not backup else self.back_up_dir, sub(input_, output_, self.base_name))
         if backup:
-            self.output_label.setText(sub('([/\\\\])([^/\\\\]+)([/\\\\])([^/\\\\]+)$', '\\1<a style="color: blue">\\2</a>\\3<a style="color: red">\\4</a>', self.output_name))
+            self.output_label.setText(sub('([/\\\\])([^/\\\\]+)([/\\\\])([^/\\\\]+)$',
+                                          '\\1<a style="color: blue">\\2</a>\\3<a style="color: red">\\4</a>', self.output_name))
         else:
             self.output_label.setText(sub('([/\\\\])([^/\\\\]+)$', '\\1<a style="color: red">\\2</a>', self.output_name))
         self.file_exist = False

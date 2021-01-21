@@ -30,13 +30,25 @@
         background: #d7ab34; }
       #container > .body QTableWidget .status[status=exist] {
         background: #d02323; }
-  #container > .footer > .remove {
-    background: gray; }
-    #container > .footer > .remove[available=t] {
-      background: #ff3d3d; }
-  #container > .footer > .do {
-    background: gray; }
-    #container > .footer > .do[available=t] {
-      background: #0073ff; }
+  #container > .running {
+    border-top: 1px solid black;
+    background: white;
+    padding: 8px 4px; }
+    #container > .running QProgressBar {
+      border: none;
+      background: #363636;
+      border-radius: 5px;
+      text-align: center;
+      color: #e5e5e5;
+      height: 15px; }
+      #container > .running QProgressBar:chunk {
+        background-color: #0076ef;
+        border-radius: 4px; }
+      #container > .running QProgressBar:disabled {
+        background: #7f7f7f; }
+    #container > .running QLabel {
+      color: black;
+      font-weight: bold;
+      margin-left: 5px; }
 
 /*# sourceMappingURL=container.css.map */

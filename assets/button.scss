@@ -3,8 +3,12 @@
   border: 1px solid black;
   color: black;
   border-radius: 3px;
-  padding: 5px 10px;
+  padding: 3px 10px;
   &:hover{
-    background: #dcdcdc;
+    background: #ddf9ff;
+  }
+  &:disabled{
+    color: gray;
+    border-color: gray;
   }
 }
