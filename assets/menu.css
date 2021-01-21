@@ -13,20 +13,18 @@ QMenuBar {
     QMenuBar QMenu:item {
       padding: 2px 25px 2px 20px;
       border: 1px solid transparent; }
-    QMenuBar QMenu:item:disabled {
-      color: #666666; }
-    QMenuBar QMenu:item:enabled:selected {
-      border-color: gray;
-      background: #90ffff; }
-    QMenuBar QMenu:separator {
-      height: 1px;
-      background: #262626;
-      margin-left: 10px;
-      margin-right: 10px;
-      margin-top: 1px;
-      margin-bottom: 1px; }
+      QMenuBar QMenu:item:disabled {
+        color: #666666; }
+      QMenuBar QMenu:item:checked, QMenuBar QMenu:item:unchecked {
+        padding: 2px 25px 2px 5px; }
+      QMenuBar QMenu:item:enabled:selected {
+        border-color: gray;
+        background: #90ffff; }
     QMenuBar QMenu:indicator {
       width: 13px;
-      height: 13px; }
+      height: 13px;
+      border: 1px solid black; }
+      QMenuBar QMenu:indicator:checked {
+        background: #ff6637; }
 
 /*# sourceMappingURL=menu.css.map */

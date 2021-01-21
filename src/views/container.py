@@ -1,4 +1,5 @@
 import re
+import time
 from os import listdir
 from os.path import dirname, basename, isfile, join
 
@@ -16,10 +17,11 @@ class Container(QWidget):
         self.setObjectName("container")
         self.setWindowTitle("批量重命名工具")
         self.setWindowIcon(QIcon('assets/icon.png'))
-        self.body_layout = QVBoxLayout()
+        self.body_layout = QHBoxLayout()
         self.files_widget_list = []
         self.all_chosen = False
         self.can_run = False
+        self.back_up = False
 
         from src.views.menu import Menu
         self.menubar = Menu(self)
@@ -52,8 +54,9 @@ class Container(QWidget):
         self.body_layout.setContentsMargins(0, 0, 0, 0)
         self.body_table.verticalHeader().hide()
         self.body_table.setHorizontalHeaderLabels(["选择", "输入", "输出", "状态"])
-        self.body_layout.addWidget(self.body_table)
+        self.body_layout.addWidget(self.body_table, Qt.AlignCenter)
         self.frame_body.setLayout(self.body_layout)
+        self.row_changed()
 
         layout = QVBoxLayout()
         layout.setContentsMargins(0, 0, 0, 0)
@@ -97,21 +100,22 @@ class Container(QWidget):
                 file = FileRow(self.frame_body, self, dir_name=dir_path, base_name=name)
                 self.body_table.setRowCount(self.body_table.rowCount()+1)
                 file.set_layout(self.body_table, start_row)
-                file.update_regx(self.input_regx.text(), self.out_regx.text())
                 file.choose_change.connect(lambda b: self.choose_state_change())
                 self.files_widget_list.append(file)
                 start_row += 1
-        self.body_table.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeToContents)
-        self.file_changed()
+        self.apply_regx()
+        self.choose_changed()
+        self.row_changed()
 
     def apply_regx(self):
         input_, output_ = self.input_regx.text(), self.out_regx.text()
+        time_stamp = time.strftime("-[%Y-%m-%d %H:%M:%S]重命名", time.localtime())
         for i in self.files_widget_list:
             try:
-                i.update_regx(input_, output_)
+                i.update_regx(input_, output_, self.back_up, time_stamp)
             except re.error:
                 break
-        self.body_table.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeToContents)
+        self.row_changed()
 
     # ------------ footer -------------
 
@@ -122,13 +126,17 @@ class Container(QWidget):
                 all_chosen = False
                 break
         self.all_chosen = all_chosen
-        self.file_changed()
+        self.choose_changed()
 
     def change_select_all(self):
         self.all_chosen = not self.all_chosen
         for i in self.files_widget_list:
             i.change_choose(self.all_chosen)
-        self.file_changed()
+        self.choose_changed()
+
+    def set_back_up(self, b):
+        self.back_up = b
+        self.apply_regx()
 
     def remove_file_row(self):
         if not self.can_run:
@@ -145,10 +153,15 @@ class Container(QWidget):
         self.files_widget_list = new_list
         self.all_chosen = False
         self.body_table.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeToContents)
-        self.file_changed()
+        self.choose_changed()
+        self.row_changed()
 
-    def file_changed(self):
-        self.menubar.action_choose_all.setText("全不选" if self.all_chosen else "全选")
+    def row_changed(self):
+        self.body_table.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeToContents)
+        self.body_table.setFixedWidth(self.body_table.horizontalHeader().length()+22)
+
+    def choose_changed(self):
+        self.menubar.action_choose_all.setText("取消全选" if self.all_chosen else "全选")
         self.menubar.action_choose_all.setEnabled(True if len(self.files_widget_list) else False)
         can_run = False
         for i in self.files_widget_list:
@@ -163,7 +176,6 @@ class Container(QWidget):
         candidate = [x for x in self.files_widget_list if x.chosen]
         # 检查重复
         lis = []
-        error_files = []
         for i in candidate:
             if i.file_exist:
                 Dialog('warn', "文件已存在", f"文件(夹){i.output_name}已经存在，无法执行!")
@@ -175,9 +187,8 @@ class Container(QWidget):
                 return
             lis.append(i.output_name)
         for i in candidate:
-            if not i.do_rename():
-                error_files.append(i.input_name)
-        if len(error_files):
-            Dialog('error', "重命名失败", f"以下文件{error_files}重命名失败!")
-        else:
-            Dialog('success', "重命名成功", f"重命名成功!")
+            error = i.do_rename(self.back_up)
+            if error:
+                Dialog('error', "重命名失败", f"以下文件{i.input_name}重命名失败!Error:{error}")
+                return
+        Dialog('success', "重命名成功", f"重命名成功!")

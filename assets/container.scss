@@ -11,10 +11,8 @@
       color: black;
     }
     >.input{
-
     }
     >.output{
-
     }
   }
   >.body{
@@ -34,16 +32,10 @@
       }
       .choose{
       }
-      .input{
+      .input, .output{
         color: black;
         margin: 0 20px;
-      }
-      .output{
-        color: black;
-        margin: 0 20px;
-        &[same=t]{
-          color: red;
-        }
+        font-weight: bold;
       }
       .status{
         border-radius: 5px;

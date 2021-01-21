@@ -13,7 +13,7 @@ class Menu(QMenuBar):
         self.tab_about = QAction('关于', self)
         self.action_choose_all = QAction('全选', self)
         self.action_delete_chosen = QAction('删除所选', self)
-        self.action_do_it = QAction('执行', self)
+        self.action_do_it = QAction('执行所选', self)
 
         self.bind_action()
         self.set_element()
@@ -30,7 +30,12 @@ class Menu(QMenuBar):
         self.action_choose_all.triggered.connect(self.container.change_select_all)
         self.action_delete_chosen.triggered.connect(self.container.remove_file_row)
         self.action_do_it.triggered.connect(self.container.do_operate)
+        action_back_up = QAction('备份文件夹', self)
+        action_back_up.setCheckable(True)
+        action_back_up.setChecked(False)
+        action_back_up.triggered.connect(self.container.set_back_up)
         self.tab_edit.addAction(self.action_choose_all)
+        self.tab_edit.addAction(action_back_up)
         self.tab_edit.addAction(self.action_delete_chosen)
         self.tab_edit.addAction(self.action_do_it)
 
