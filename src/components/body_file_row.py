@@ -92,7 +92,3 @@ class FileRow(QFrame):
             return None
         except BaseException as e:
             return str(e)
-
-    def set_same_name_warn(self, name):
-        self.output_label.setProperty("same", "t" if name == self.output_name else "f")
-        update_css(self.output_label)

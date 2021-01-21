@@ -72,7 +72,6 @@ class Running(QFrame):
         self.setLayout(layout)
 
     def run(self, lis, backup):
-        lis = [x for x in range(15)]
         self.progress.setMaximum(len(lis))
         self.progress.setEnabled(True)
         self.progress.setValue(0)

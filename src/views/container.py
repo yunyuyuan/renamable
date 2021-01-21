@@ -117,7 +117,7 @@ class Container(QWidget):
 
     def apply_regx(self):
         input_, output_ = self.input_regx.text(), self.out_regx.text()
-        time_stamp = time.strftime("-[%Y-%m-%d %H:%M:%S]重命名", time.localtime())
+        time_stamp = time.strftime("--%Y-%m-%d %H-%M-%S重命名", time.localtime())
         for i in self.files_widget_list:
             try:
                 i.update_regx(input_, output_, self.back_up, time_stamp)

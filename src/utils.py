@@ -1,4 +1,4 @@
-from os.path import join, normpath
+from os.path import join, normcase, sep
 
 from PyQt5.Qt import *
 
@@ -15,4 +15,4 @@ def update_css(widget: QWidget):
 
 
 def parse_path(*args):
-    return normpath(join(*args))
+    return normcase(join(*args))
