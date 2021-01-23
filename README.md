@@ -8,9 +8,10 @@
 
 ## 使用
 
-* 下载[renamable.rar](https://wws.lanzous.com/iKJRekntrdc)。解压缩后，直接运行`renamable.exe`
-* clone项目->`python main.py`
-* clone项目->`pyinstaller -D -w -i=assets/icon.ico -n renamable main.py`
+**三选一**
+* **想下载即用**：下载[renamable.rar](https://wws.lanzous.com/iKJRekntrdc)。解压缩后，直接运行`renamable.exe`
+* **想跑python代码**：`clone`项目->安装PyQt5->`python main.py`
+* **想自己打包exe文件**：`clone`项目->安装PyQt5和pyinstaller->`pyinstaller -D -w -i=assets/icon.ico -n renamable main.py`
 
 ## ✨Tips
 需要会写正则表达式。如果你不会写，请看[教程](https://www.runoob.com/regexp/regexp-tutorial.html)。
